@@ -1,10 +1,10 @@
 import React from "react";
 
 interface Props {
-  height?: number | string;
+  height?: number;
   innerColor?: string;
   outerColor?: string;
-  width?: number | string;
+  width?: number;
 }
 
 const Camera: React.FC<Props> = ({ height, innerColor, outerColor, width }) => {
@@ -12,7 +12,7 @@ const Camera: React.FC<Props> = ({ height, innerColor, outerColor, width }) => {
     <svg
       width={width}
       height={height}
-      viewBox="0 0 25 25"
+      viewBox={`0 0 ${width} ${height}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

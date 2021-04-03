@@ -2,8 +2,8 @@ import React from "react";
 
 interface Props {
   color?: string;
-  height?: string | number;
-  width?: string | number;
+  height?: number;
+  width?: number;
 }
 
 const MoreVertical: React.FC<Props> = ({ color, height, width }) => {
@@ -11,7 +11,7 @@ const MoreVertical: React.FC<Props> = ({ color, height, width }) => {
     <svg
       width={width}
       height={height}
-      viewBox="0 0 5 21"
+      viewBox={`0 0 ${width} ${height}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

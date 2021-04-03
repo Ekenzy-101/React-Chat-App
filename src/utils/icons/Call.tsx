@@ -2,8 +2,8 @@ import React from "react";
 
 interface Props {
   color?: string;
-  height?: number | string;
-  width?: number | string;
+  height?: number;
+  width?: number;
 }
 
 const Call: React.FC<Props> = ({ color, height, width }) => {
@@ -11,7 +11,7 @@ const Call: React.FC<Props> = ({ color, height, width }) => {
     <svg
       width={width}
       height={height}
-      viewBox="0 0 25 25"
+      viewBox={`0 0 ${width! + 3} ${height! + 3}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
