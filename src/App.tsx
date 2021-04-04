@@ -1,22 +1,38 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
-import ChatsPage from "./pages/Chats";
+import { useQuery } from "react-query";
+import { Toaster } from "react-hot-toast";
+import Routes from "./routes";
 
-import LoginPage from "./pages/Login";
-import RegisterPage from "./pages/Register";
-import {
-  TO_CHATS_PAGE,
-  TO_LOGIN_PAGE,
-  TO_REGISTER_PAGE,
-} from "./utils/contants";
+import { getAuthUser } from "./utils/services/auth";
 
 const App: React.FC = () => {
+  const { data, isLoading, error } = useQuery("authUser", getAuthUser);
+
+  console.log({ data, isLoading, error });
+
+  if (isLoading) return <div>IS LOADING</div>;
   return (
-    <Switch>
-      <Route exact path={TO_LOGIN_PAGE} component={LoginPage} />
-      <Route path={TO_REGISTER_PAGE} component={RegisterPage} />
-      <Route path={TO_CHATS_PAGE} component={ChatsPage} />
-    </Switch>
+    <div>
+      <Toaster
+        toastOptions={{
+          error: {
+            style: {
+              background: "rgb(253, 236, 234)",
+              color: "rgb(97, 26, 21)",
+              fontFamily: "Proxima Nova Regular",
+            },
+          },
+          success: {
+            style: {
+              background: "rgb(237, 247, 237)",
+              color: "rgb(30, 70, 32)",
+              fontFamily: "Proxima Nova Regular",
+            },
+          },
+        }}
+      />
+      <Routes />
+    </div>
   );
 };
 
