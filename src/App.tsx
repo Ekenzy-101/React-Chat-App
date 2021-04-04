@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import ChatsPage from "./pages/Chats";
 
 import LoginPage from "./pages/Login";
@@ -12,13 +12,11 @@ import {
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path={TO_LOGIN_PAGE} component={LoginPage} />
-        <Route path={TO_REGISTER_PAGE} component={RegisterPage} />
-        <Route path={TO_CHATS_PAGE} component={ChatsPage} />
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      <Route exact path={TO_LOGIN_PAGE} component={LoginPage} />
+      <Route path={TO_REGISTER_PAGE} component={RegisterPage} />
+      <Route path={TO_CHATS_PAGE} component={ChatsPage} />
+    </Switch>
   );
 };
 

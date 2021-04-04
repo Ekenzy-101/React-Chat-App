@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+
+@font-face {
+  font-family: "Geometria Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Geometria Regular"),
+    url("../src/utils/fonts/Geometria.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Geometria Medium";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Geometria Medium"),
+    url("../src/utils/fonts/Geometria-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Geometria Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Geometria Bold"),
+    url("../src/utils/fonts/Geometria-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Proxima Nova Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Proxima Nova Bold"),
+    url("../src/utils/fonts/Proxima\ Nova\ Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Proxima Nova Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Proxima Nova Regular"),
+    url("../src/utils/fonts/ProximaNova\ Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Proxima Nova Light";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Proxima Nova Light"),
+    url("../src/utils/fonts/Proxima\ Nova\ ScOsf\ Light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Proxima Nova"),
+    url("../src/utils/fonts/Proxima\ Nova\ Font.otf") format("opentype");
+}
+
+* {
+  box-sizing: border-box;
+}
+@tailwind utilities;
