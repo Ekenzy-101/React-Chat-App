@@ -15,7 +15,8 @@ export interface Message {
   createdAt: string;
   image: string;
   roomId: string;
-  status: "active" | "deleted" | "seen";
+  seenBy: string[];
+  status: "active" | "deleted";
   text: string;
   userId: string;
   updatedAt: string;

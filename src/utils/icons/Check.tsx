@@ -19,17 +19,19 @@ const Check: React.FC<Props> = ({ color, height, width, variant }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M1 3.04082L3.22581 5L7 1"
+        d="M1 4.06122L4.33871 7L10 1"
         stroke={color}
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeWidth={2}
       />
       {isDouble ? (
         <path
-          d="M5 3.04082L7.22581 5L11 1"
-          stroke="white"
+          d="M7 4.06122L10.3387 7L16 1"
+          stroke={color}
           strokeLinecap="round"
           strokeLinejoin="round"
+          strokeWidth={2}
         />
       ) : null}
     </svg>
@@ -38,9 +40,9 @@ const Check: React.FC<Props> = ({ color, height, width, variant }) => {
 
 Check.defaultProps = {
   color: "#FFFFFF",
-  height: 6,
+  height: 10,
   variant: "single",
-  width: 6,
+  width: 10,
 };
 
 export default Check;
