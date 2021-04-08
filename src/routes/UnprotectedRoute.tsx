@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useQueryClient } from "react-query";
 
 import { TO_CHATS_PAGE } from "../utils/contants";
+import { useAuthUser } from "../hooks/useAuthUser";
 
 interface Props {
   component: React.FC<{}>;
@@ -18,8 +18,7 @@ const UnprotectedRoute: React.FC<Props> = ({
   exact,
   ...rest
 }) => {
-  const queryClient = useQueryClient();
-  const user = queryClient.getQueryData("authUser");
+  const user = useAuthUser();
 
   return (
     <Route

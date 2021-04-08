@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useQueryClient } from "react-query";
 
 import { TO_LOGIN_PAGE } from "../utils/contants";
+import { useAuthUser } from "../hooks/useAuthUser";
 
 interface Props {
   component: React.FC<{}>;
   AppProps?: object;
   path: string;
-  exact: boolean;
+  exact?: boolean;
 }
 
 const ProtectedRoute: React.FC<Props> = ({
@@ -16,9 +16,7 @@ const ProtectedRoute: React.FC<Props> = ({
   AppProps,
   ...rest
 }) => {
-  const queryClient = useQueryClient();
-  const user = queryClient.getQueryData("authUser");
-  console.log(user);
+  const user = useAuthUser();
 
   return (
     <Route
