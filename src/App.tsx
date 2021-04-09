@@ -1,16 +1,21 @@
 import React from "react";
 import { useQuery } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { Toaster } from "react-hot-toast";
-import Routes from "./routes";
 
+import LoadingPage from "./pages/Loading";
+import ErrorPage from "./pages/Error";
+import Routes from "./routes";
 import { getAuthUser } from "./utils/services/auth";
 
 const App: React.FC = () => {
-  const { data, isLoading, error } = useQuery("authUser", getAuthUser);
+  const { status } = useQuery({
+    queryKey: "authUser",
+    queryFn: getAuthUser,
+  });
 
-  console.log({ data, isLoading, error });
-
-  if (isLoading) return <div>IS LOADING</div>;
+  if (status === "loading") return <LoadingPage />;
+  if (status === "error") return <ErrorPage />;
   return (
     <div>
       <Toaster
@@ -32,6 +37,7 @@ const App: React.FC = () => {
         }}
       />
       <Routes />
+      <ReactQueryDevtools initialIsOpen={false} />
     </div>
   );
 };

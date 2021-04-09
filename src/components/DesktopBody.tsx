@@ -15,7 +15,7 @@ const DesktopBody: React.FC<Props> = ({ rooms }) => {
   return (
     <div className="flex flex-grow z-10">
       <SideBar />
-      <ChatList isDesktopView rooms={rooms} />
+      <ChatList rooms={rooms} />
       <ChatContainer room={room} />
     </div>
   );

@@ -1,16 +1,23 @@
 import React from "react";
 import { useHistory, useParams } from "react-router";
 
-import { TO_CHATS_PAGE } from "../utils/contants";
+import { PROFILE_PIC, TO_CHATS_PAGE } from "../utils/contants";
 import Back from "../utils/icons/Back";
-import profilePic from "../utils/images/ekene.jpg";
 import Camera from "../utils/icons/Camera";
+import { ChatRoom } from "../utils/types";
+import { useAuthUser } from "../hooks/useAuthUser";
 
-const MobileHeader: React.FC = () => {
+interface Props {
+  room?: ChatRoom;
+}
+
+const MobileHeader: React.FC<Props> = ({ room }) => {
+  const user = useAuthUser();
   const history = useHistory();
   const params = useParams<{ id: string }>();
 
-  if (params.id) {
+  if (params.id && room) {
+    const otherUser = room.users.find((u) => u._id !== user?._id);
     return (
       <div className="bg-milk-white sticky top-0 z-50 h-24 pt-10 px-4 flex font-nova-regular justify-between items-center">
         <div
@@ -20,11 +27,11 @@ const MobileHeader: React.FC = () => {
           <Back />
           <p className="text-sm ml-1">Message</p>
         </div>
-        <p className=" text-lg">Maren Mongo</p>
+        <p className=" text-lg">{otherUser?.name}</p>
         <div className="relative rounded-full">
           <img
-            src={profilePic}
-            alt="Ekene"
+            src={PROFILE_PIC}
+            alt={otherUser?.name}
             className="h-10 rounded-full w-10"
           />
           <span className="absolute h-3 w-3 bg-green rounded-full border-2 border-white bottom-0 right-1 -mt-1 -mr-1"></span>

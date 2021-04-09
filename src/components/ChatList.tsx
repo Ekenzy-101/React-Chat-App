@@ -1,14 +1,15 @@
 import React from "react";
+import { useDesktopView } from "../hooks/useDesktopView";
 import Add from "../utils/icons/Add";
 import { ChatRoom } from "../utils/types";
 import ChatItem from "./ChatItem";
 
 interface Props {
-  isDesktopView?: boolean;
   rooms: ChatRoom[];
 }
 
-const ChatList: React.FC<Props> = ({ isDesktopView, rooms }) => {
+const ChatList: React.FC<Props> = ({ rooms }) => {
+  const isDesktopView = useDesktopView();
   return (
     <div
       className={
@@ -35,10 +36,6 @@ const ChatList: React.FC<Props> = ({ isDesktopView, rooms }) => {
       ) : null}
     </div>
   );
-};
-
-ChatList.defaultProps = {
-  isDesktopView: false,
 };
 
 export default ChatList;

@@ -1,3 +1,4 @@
+import { eachDayOfInterval, isSameDay } from "date-fns";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -6,17 +7,18 @@ import Microphone from "../utils/icons/Microphone";
 import Emoji from "../utils/icons/Emoji";
 import Message from "./Message";
 import { useDesktopView } from "../hooks/useDesktopView";
-import { ChatRoom } from "../utils/types";
-import { useSocket } from "../pages/Chats";
-import { eachDayOfInterval, isSameDay } from "date-fns";
+import { ChatRoom, Message as ChatMessage } from "../utils/types";
+import { useSocket } from "../pages/ChatsContainer";
 import { getDateFromDateObject } from "../utils/helpers/date";
 import Send from "../utils/icons/Send";
+import { useAuthUser } from "../hooks/useAuthUser";
 
 interface Props {
   room?: ChatRoom;
 }
 
 const ChatContainer: React.FC<Props> = ({ room }) => {
+  const user = useAuthUser();
   const socket = useSocket();
 
   const [text, setText] = useState("");
@@ -44,10 +46,35 @@ const ChatContainer: React.FC<Props> = ({ room }) => {
 
   const handleSendMessage = () => {
     if (text?.trim()) {
-      socket?.emit("message", { text, roomId: room?._id });
+      socket?.emit("sendMessage", { text, roomId: room?._id });
       setText("");
       scrollToBottom();
     }
+  };
+
+  const returnStyledMessageBasedOnIndex = (
+    message: ChatMessage,
+    messageIndex: number,
+    messages: ChatMessage[]
+  ) => {
+    let className = "";
+    const isOwner = message.userId === user?._id;
+    const nextMessage = messages[messageIndex + 1];
+
+    if (!nextMessage) {
+      className = isOwner ? " rounded-br-none" : " rounded-bl-none";
+    } else if (nextMessage.userId !== message.userId) {
+      className = isOwner ? " rounded-br-none" : " rounded-bl-none";
+    }
+
+    return (
+      <Message
+        key={message._id}
+        message={message}
+        isOwner={isOwner}
+        className={className}
+      />
+    );
   };
 
   if (!params.id || !room) return null;
@@ -75,16 +102,14 @@ const ChatContainer: React.FC<Props> = ({ room }) => {
         }
         ref={divRef}
       >
-        {dayIntervals.map((interval, index) => (
-          <div key={index}>
+        {dayIntervals.map((interval, intervalIndex) => (
+          <div key={intervalIndex}>
             <div className="font-geo-regular text-sm mb-11 mt-5 mx-auto w-fit px-5.5 py-1.5 relative rounded-2.5 bg-light-gray text-black">
               {getDateFromDateObject(interval)}
             </div>
             {sortedMessages
               .filter((m) => isSameDay(new Date(m.createdAt), interval))
-              .map((message) => (
-                <Message key={message._id} message={message} />
-              ))}
+              .map(returnStyledMessageBasedOnIndex)}
           </div>
         ))}
       </div>

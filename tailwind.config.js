@@ -9,6 +9,7 @@ module.exports = {
       xl: "1440px",
     },
     colors: {
+      blue: "#34B7F1",
       black: "#000000",
       border: "#E2E2E2",
       current: "currentColor",
@@ -53,11 +54,17 @@ module.exports = {
       },
       maxHeight: {
         "fit-150": "calc(100vh - 150px)",
-        "fit-270": "calc(100vh - 310px)",
+        "fit-200": "calc(100vh - 200px)",
+        "fit-310": "calc(100vh - 310px)",
       },
       maxWidth: {
         72: "18rem",
         198: "49.5rem",
+      },
+      minHeight: {
+        "fit-150": "calc(100vh - 150px)",
+        "fit-200": "calc(100vh - 200px)",
+        "fit-310": "calc(100vh - 310px)",
       },
       padding: {
         1.5: "0.375rem",

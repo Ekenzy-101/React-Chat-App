@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 import Call from "../utils/icons/Call";
 import WhatsApp from "../utils/icons/WhatsApp";
 import { colors } from "../utils/styles/colors";
-import profilePic from "../utils/images/ekene.jpg";
 import MoreVertical from "../utils/icons/MoreVertical";
 import { useAuthUser } from "../hooks/useAuthUser";
 import { ChatRoom } from "../utils/types";
+import { PROFILE_PIC } from "../utils/contants";
 interface Props {
   room?: ChatRoom;
 }
@@ -33,7 +33,7 @@ const DesktopHeader: React.FC<Props> = ({ room }) => {
         <div className="flex items-center">
           <p className="font-nova-regular mr-4 text-white">{user?.name}</p>
           <img
-            src={profilePic}
+            src={PROFILE_PIC}
             alt={user?.name}
             className="h-11.5 rounded-full w-11.5"
           />
@@ -43,7 +43,7 @@ const DesktopHeader: React.FC<Props> = ({ room }) => {
         <div className="mt-4 ml-120 mr-22 flex justify-between items-center">
           <div className="flex items-center">
             <img
-              src={profilePic}
+              src={PROFILE_PIC}
               alt={otherUser?.name}
               className="h-14 rounded-full w-14"
             />

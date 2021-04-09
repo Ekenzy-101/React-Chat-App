@@ -3,7 +3,7 @@ import { Redirect, Switch } from "react-router-dom";
 import { useAuthUser } from "../hooks/useAuthUser";
 import CallRegistryPage from "../pages/CallRegistry";
 
-import ChatsPage from "../pages/Chats";
+import ChatsContainer from "../pages/ChatsContainer";
 import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
 import SettingsPage from "../pages/Settings";
@@ -29,7 +29,7 @@ const Routes = () => {
         path={TO_REGISTER_PAGE}
         component={RegisterPage}
       />
-      <ProtectedRoute path={TO_CHATS_PAGE} component={ChatsPage} />
+      <ProtectedRoute path={TO_CHATS_PAGE} component={ChatsContainer} />
       <ProtectedRoute path={TO_STATUSES_PAGE} component={StatusPage} />
       <ProtectedRoute path={TO_SETTINGS_PAGE} component={SettingsPage} />
       <ProtectedRoute
