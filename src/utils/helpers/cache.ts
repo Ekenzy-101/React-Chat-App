@@ -16,6 +16,19 @@ export const addMessageToRoomCache = (message: Message) => (
   return [];
 };
 
+export const addRoomToRoomsCache = (room: ChatRoom) => (
+  oldRooms: ChatRoom[] | undefined
+) => {
+  if (oldRooms) {
+    const rooms = [...oldRooms];
+    rooms.unshift(room);
+
+    console.log(rooms);
+    return rooms;
+  }
+  return [];
+};
+
 export const addAuthUserIdToUnseenMessagesInCache = ({
   roomId,
   userId,

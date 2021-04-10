@@ -38,7 +38,7 @@ const ChatContainer: React.FC<Props> = ({ room }) => {
 
   useEffect(() => {
     scrollToBottom(0);
-  }, []);
+  }, [params.id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
@@ -83,9 +83,17 @@ const ChatContainer: React.FC<Props> = ({ room }) => {
     (a, b) => (new Date(a.createdAt) as any) - (new Date(b.createdAt) as any)
   );
 
+  const endDate = new Date(
+    sortedMessages.length
+      ? sortedMessages.slice(-1)[0].createdAt
+      : room.createdAt
+  );
+  const startDate = new Date(
+    sortedMessages.length ? sortedMessages[0].createdAt : room.createdAt
+  );
   const dayIntervals = eachDayOfInterval({
-    end: new Date(sortedMessages.slice(-1)[0].createdAt),
-    start: new Date(sortedMessages[0].createdAt),
+    end: endDate,
+    start: startDate,
   });
 
   return (

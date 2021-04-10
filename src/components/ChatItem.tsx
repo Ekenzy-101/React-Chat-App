@@ -54,9 +54,11 @@ const ChatItem: React.FC<Props> = ({ isActive, room }) => {
         <p className="font-geo-regular text-sm">{latestMessage?.text}</p>
       </div>
       <div className="flex flex-col items-center">
-        <p className="font-nova-regular text-sm">
-          {getDateFromISOString(latestMessage.createdAt)}
-        </p>
+        {latestMessage ? (
+          <p className="font-nova-regular text-sm">
+            {getDateFromISOString(latestMessage.createdAt)}
+          </p>
+        ) : null}
         {unSeenMessages.length ? (
           <span className="bg-green font-geo-regular text-sm text-white text-center rounded-full w-5 h-5">
             {unSeenMessages.length}

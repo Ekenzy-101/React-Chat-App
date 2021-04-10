@@ -23,16 +23,24 @@ const validatePassword = (value: string) => {
   return undefined;
 };
 
+const validateUserId = (value: string) => {
+  if (!validator.isMongoId(value)) return "User ID is invalid";
+
+  return undefined;
+};
+
 const validate = {
   email: validateEmail,
   name: validateName,
   password: validatePassword,
+  userId: validateUserId,
 };
 
 export interface FormValues {
   name: string;
   email: string;
   password: string;
+  userId: string;
 }
 
 export const resolver: Resolver<FormValues> = async (values) => {

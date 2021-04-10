@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 
 import Button from "../components/form/Button";
 import Input from "../components/form/Input";
+import Form from "../components/form/Form";
 import { TO_CHATS_PAGE, TO_REGISTER_PAGE } from "../utils/contants";
 import Loading from "../utils/icons/Loading";
 import WhatsApp from "../utils/icons/WhatsApp";
@@ -56,7 +57,7 @@ const LoginPage: React.FC = () => {
         <p className="font-geo-medium text-2xl text-center mb-8">
           Welcome to Whatsapp
         </p>
-        <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Input
             {...register("email")}
             placeholder="Email"
@@ -77,7 +78,7 @@ const LoginPage: React.FC = () => {
           <Button type="submit" disabled={isLoading}>
             {isLoading ? <Loading /> : "Login"}
           </Button>
-        </form>
+        </Form>
         <p className="font-geo-regular mt-4 text-sm flex justify-between">
           Don't have an account?
           <Link to={TO_REGISTER_PAGE} className="text-green no-underline">

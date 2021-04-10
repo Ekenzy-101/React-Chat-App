@@ -6,11 +6,15 @@ interface Props
     HTMLButtonElement
   > {}
 
-const Button: React.FC<Props> = (props) => {
+const Button: React.FC<Props> = ({ className, ...props }) => {
   return (
     <button
       {...props}
-      className="bg-green border-none flex justify-center items-center focus:outline-none  h-11 rounded-2.5xl text-white  w-full"
+      className={
+        className
+          ? className
+          : "bg-green border-none flex justify-center items-center focus:outline-none  h-11 rounded-2.5xl text-white  w-full "
+      }
     />
   );
 };

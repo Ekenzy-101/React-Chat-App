@@ -15,6 +15,7 @@ import {
   addMessageToRoomCache,
   addAuthUserIdToUnseenMessagesInCache,
   addOtherUserIdToUnseenMessagesInCache,
+  addRoomToRoomsCache,
 } from "../utils/helpers/cache";
 import { getRooms } from "../utils/services/room";
 import { ChatRoom, Message } from "../utils/types";
@@ -58,29 +59,40 @@ const ChatsContainer: React.FC = () => {
       }
     });
 
-    socketRef.current.on("newMessage", (message: Message) => {
+    socketRef.current?.on("newMessage", (message: Message) => {
       queryClient.setQueryData("rooms", addMessageToRoomCache(message));
     });
 
-    socketRef.current.on("otherUserHasSeenMessages", (roomId: string) => {
-      queryClient.setQueryData(
-        "rooms",
-
-        addOtherUserIdToUnseenMessagesInCache({
-          roomId,
-          userId: user?._id!,
-        })
-      );
+    socketRef.current?.on("newRoom", (room: ChatRoom) => {
+      queryClient.setQueryData("rooms", addRoomToRoomsCache(room));
     });
 
-    socketRef.current.on("allUsersHaveSeenMessages", (roomId: string) => {
-      queryClient.setQueryData(
-        "rooms",
-        addAuthUserIdToUnseenMessagesInCache({
-          roomId,
-          userId: user?._id!,
-        })
-      );
+    socketRef.current?.on("otherUserHasSeenMessages", (roomId: string) => {
+      if (window.location.href.slice(-24) === roomId) {
+        console.log("otherUserHasSeenMessages");
+
+        queryClient.setQueryData(
+          "rooms",
+
+          addOtherUserIdToUnseenMessagesInCache({
+            roomId,
+            userId: user?._id!,
+          })
+        );
+      }
+    });
+
+    socketRef.current?.on("allUsersHaveSeenMessages", (roomId: string) => {
+      if (window.location.href.slice(-24) === roomId) {
+        console.log("allUserHasSeenMessages");
+        queryClient.setQueryData(
+          "rooms",
+          addAuthUserIdToUnseenMessagesInCache({
+            roomId,
+            userId: user?._id!,
+          })
+        );
+      }
     });
 
     return () => {

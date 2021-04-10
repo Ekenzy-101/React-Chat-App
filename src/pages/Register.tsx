@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-hot-toast";
 
 import Button from "../components/form/Button";
+import Form from "../components/form/Form";
 import Input from "../components/form/Input";
 import { TO_CHATS_PAGE, TO_LOGIN_PAGE } from "../utils/contants";
 import WhatsApp from "../utils/icons/WhatsApp";
@@ -55,7 +56,7 @@ const RegisterPage: React.FC = () => {
         <p className="font-geo-medium text-2xl text-center mb-8">
           Create account
         </p>
-        <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Input
             {...register("name")}
             placeholder="Name"
@@ -77,7 +78,7 @@ const RegisterPage: React.FC = () => {
           <Button type="submit" disabled={isLoading}>
             {isLoading ? <Loading /> : "Register"}
           </Button>
-        </form>
+        </Form>
         <p className="font-geo-regular mt-4 text-sm flex justify-between">
           Already have an account?
           <Link to={TO_LOGIN_PAGE} className="text-green no-underline">

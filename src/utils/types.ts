@@ -2,6 +2,7 @@ export interface ChatRoom {
   _id: string;
   users: User[];
   messages: Message[];
+  createdAt: string;
 }
 
 export interface User {
